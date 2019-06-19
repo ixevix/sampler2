@@ -60,7 +60,15 @@ const Sample: React.FC = () => {
   }
 
   console.log(state)
-  return <PlayButton toggle={toggle} playing={state.playing} />
+  return <div className='Sample'>
+      <div className='slider-wrapper'>
+        <input type='range' className='slider' />
+      </div>
+      
+      <div>
+        <PlayButton toggle={toggle} playing={state.playing} />
+      </div>
+    </div>
 }
 
 export default Sample
