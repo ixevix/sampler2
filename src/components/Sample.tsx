@@ -1,0 +1,56 @@
+import React, {useState} from 'react'
+import p5 from 'p5'
+import 'p5/lib/addons/p5.sound'
+
+const initialValues = {
+  carrier: {
+    type: 'sine',
+    frequency: 240,
+    amplification: 1
+  },
+  filter: {
+    cutoffFrequency: 200,
+    bandpassFrequency: 50,
+    type: 'lowpass',
+  },
+  modulator: {
+    type: 'sine',
+    frequency: 20,
+    amplification: 0
+  },
+  envelope: {
+    attackAmplitude: 1,
+    releaseAmplitude: 0,
+    attackTime: 0.001,
+    decayTime: 0.2,
+    sustainTime: 0.2,
+    releaseTime: 0.5,
+    repeatTime: 1000,
+  }
+}
+
+const Sample: React.FC = () => {
+  const [state, setState] = useState(initialValues)
+  const [carrier, setCarrier] = useState(new p5.Oscillator())
+  const [modulator, setModulator] = useState(new p5.Oscillator())
+  const [filter, setFilter] = useState(new p5.Filter())
+  const [envelope, setEnvelope] = useState(new p5.Envelope())
+  const [envelopeRepeatTime, setEnvelopeRepeatTime] = useState(state.envelope.repeatTime)
+  carrier.setType(state.carrier.type)
+  carrier.freq(state.carrier.frequency)
+  carrier.amp(state.carrier.amplification)
+  modulator.setType(state.modulator.type)
+  modulator.freq(state.modulator.frequency)
+  modulator.amp(state.modulator.amplification)
+  filter.res(state.filter.bandpassFrequency)
+  modulator.start()
+  modulator.disconnect()
+  carrier.freq(modulator)
+  carrier.connect(filter)
+  filter.disconnect()
+
+  console.log(state)
+  return (null)
+}
+
+export default Sample
