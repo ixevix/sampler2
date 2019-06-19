@@ -16,9 +16,7 @@
 .slider {
   width: 100px;
   height: 22px;
-  display: block;
   transform: rotate(90deg);
   transform-origin: 11px 11px;
-  white-space: nowrap;
   margin: 0;
 }

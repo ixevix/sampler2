@@ -64,6 +64,15 @@ const Sample: React.FC = () => {
       <div className='slider-wrapper'>
         <input type='range' className='slider' />
       </div>
+      <div className='slider-wrapper'>
+        <input type='range' className='slider' />
+      </div>
+      <div className='slider-wrapper'>
+        <input type='range' className='slider' />
+      </div>
+      <div className='slider-wrapper'>
+        <input type='range' className='slider' />
+      </div>
       
       <div>
         <PlayButton toggle={toggle} playing={state.playing} />
