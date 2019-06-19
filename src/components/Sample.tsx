@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, EventHandler} from 'react'
 import p5 from 'p5'
 import 'p5/lib/addons/p5.sound'
+import PlayButton from './PlayButton'
 
 const initialValues = {
   carrier: {
@@ -26,7 +27,8 @@ const initialValues = {
     sustainTime: 0.2,
     releaseTime: 0.5,
     repeatTime: 1000,
-  }
+  },
+  playing: false
 }
 
 const Sample: React.FC = () => {
@@ -49,8 +51,17 @@ const Sample: React.FC = () => {
   carrier.connect(filter)
   filter.disconnect()
 
+  const toggle = () => {
+    if (state.playing) {
+      carrier.stop(0)
+    } else {
+      carrier.start()
+    }
+    setState({...state, playing: !state.playing})
+  }
+
   console.log(state)
-  return (null)
+  return <PlayButton toggle={toggle} playing={state.playing} />
 }
 
 export default Sample
