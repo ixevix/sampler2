@@ -37,7 +37,6 @@ const Sample: React.FC = () => {
   const [modulator, setModulator] = useState(new p5.Oscillator())
   const [filter, setFilter] = useState(new p5.Filter())
   const [envelope, setEnvelope] = useState(new p5.Envelope())
-  const [envelopeRepeatTime, setEnvelopeRepeatTime] = useState(state.envelope.repeatTime)
   carrier.setType(state.carrier.type)
   carrier.freq(state.carrier.frequency)
   carrier.amp(state.carrier.amplification)
