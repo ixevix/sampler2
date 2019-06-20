@@ -5,8 +5,9 @@ import PlayButton from './PlayButton'
 import Slider from './Slider'
 import WaveformSelect from './WaveformSelect'
 import Header from './Header'
+import {State} from '../types'
 
-const initialValues = {
+const initialValues: State = {
   carrier: {
     type: 'sine',
     frequency: 240,
@@ -39,8 +40,14 @@ const modulatorOscillator = new p5.Oscillator()
 const filterObject = new p5.Filter()
 const envelopeObject = new p5.Envelope()
 
-const Sample: React.FC = () => {
-  const [state, setState] = useState(initialValues)
+type Props = {
+  loadedValues?: State,
+  index: number,
+  onChange: Function,
+}
+
+const Sample: React.FC<Props> = ({loadedValues, index, onChange}) => {
+  const [state, setState] = useState(loadedValues || initialValues)
   const [carrier, setCarrier] = useState(carrierOscillator)
   const [modulator, setModulator] = useState(modulatorOscillator)
   const [filter, setFilter] = useState(filterObject)
@@ -75,36 +82,42 @@ const Sample: React.FC = () => {
     const value = {...state.carrier, type: event.currentTarget.value}
     setState({...state, carrier: value})
     carrier.setType(state.carrier.type)
+    onChange({...state, carrier: value}, index)
   }
 
   const updateCarrierFrequency = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = {...state.carrier, frequency: parseInt(event.target.value)}
     setState({...state, carrier: value})
     carrier.freq(state.carrier.frequency)
+    onChange({...state, carrier: value}, index)
   }
 
   const updateCarrierAmplitude = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = {...state.carrier, amplification: parseFloat(event.target.value)}
     setState({...state, carrier: value})
     carrier.amp(state.carrier.amplification)
+    onChange({...state, carrier: value}, index)
   }
 
   const updateModulatorWaveForm = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = {...state.modulator, type: event.currentTarget.value}
     setState({...state, modulator: value})
     modulator.setType(state.modulator.type)
+    onChange({...state, modulator: value}, index)
   }
 
   const updateModulatorFrequency = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = {...state.modulator, frequency: parseInt(event.target.value)}
     setState({...state, modulator: value})
     modulator.freq(state.modulator.frequency)
+    onChange({...state, modulator: value}, index)
   }
 
   const updateModulatorAmplitude = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = {...state.modulator, amplification: parseInt(event.target.value)}
     setState({...state, modulator: value})
     modulator.amp(state.modulator.amplification)
+    onChange({...state, modulator: value}, index)
   }
 
   return (
