@@ -8,7 +8,7 @@ type Props = {
 const PlayButton: React.FC<Props> = ({toggle, playing}) => {
   return (
     <input 
-      className='PlayButton'
+      className='SampleButton'
       type='button'
       value={playing ? 'Stop' : 'Start'}
       onClick={() => toggle()}

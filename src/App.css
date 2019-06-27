@@ -5,7 +5,7 @@
 .Sample {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .SampleSelect {
@@ -40,7 +40,13 @@
   margin: 10px;
 }
 
-.PlayButton {
+.SampleButton {
+  width: 5rem;
+  height: 2rem;
+  margin: 1rem 1rem 0 1rem;
+}
+
+.Button {
   width: 5rem;
   margin: 1rem 1rem 0 1rem;
 }

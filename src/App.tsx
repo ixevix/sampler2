@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Sample from './components/Sample'
 import {State} from './types'
+import FullscreenButton from './components/FullscreenButton'
 
 const App: React.FC = () => {
   const savedState = localStorage.getItem('samples')
@@ -22,16 +23,22 @@ const App: React.FC = () => {
   } else {
     const parsed: Array<State> = JSON.parse(savedState)
     const samples = parsed.map((sample, i) => {
-      return <Sample index={i} key={i} onChange={updateState} loadedValues={sample} />
+      return (
+        <Sample
+          index={i}
+          key={i}
+          onChange={updateState}
+          loadedValues={sample}
+        />
+      )
     })
     return (
       <div className='App'>
         {samples}
+        <FullscreenButton />
       </div>
     )
   }
-
-
 }
 
 export default App;
