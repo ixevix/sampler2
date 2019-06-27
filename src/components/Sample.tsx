@@ -118,28 +118,33 @@ const Sample: React.FC<Props> = ({loadedValues, index, onChange}) => {
   }
 
   return (
-    <div className='Sample'>
-      <div className='column'>
-        <Header>Sample {index}</Header>
-        <PlayButton toggle={toggle} playing={state.playing} />
-        <KeyboardButton />
+    <div className='SampleContainer'>
+      <div className='keyboard'>
+        <Header>{window.innerHeight},{window.outerHeight},{window.innerWidth},{window.innerHeight}</Header>
+      </div> 
+      <div className='Sample'>
+        <div className='column'>
+          <Header>Sample {index}</Header>
+          <PlayButton toggle={toggle} playing={state.playing} />
+          <KeyboardButton />
+        </div>
+        <div className='column'>
+          <Header>Carrier</Header>
+          <WaveformSelect value={state.carrier.type} update={updateCarrierWaveForm} />
+          <Header>{state.carrier.frequency}</Header>
+          <Header>{state.carrier.amplification.toFixed(2)}</Header>
+        </div>
+        <Slider defaultValue={state.carrier.frequency} min={0} max={1000} step={1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateCarrierFrequency(e)} />
+        <Slider defaultValue={state.carrier.amplification} min={0} max={1} step={0.01} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateCarrierAmplitude(e)} />
+        <div className='column'>
+          <Header>Modulator</Header>
+          <WaveformSelect value={state.modulator.type} update={updateModulatorWaveForm} />
+          <Header>{state.modulator.frequency}</Header>
+          <Header>{state.modulator.amplification.toFixed(2)}</Header>
+        </div>
+        <Slider defaultValue={state.modulator.frequency} min={0} max={150} step={1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateModulatorFrequency(e)} />
+        <Slider defaultValue={state.modulator.amplification} min={-150} max={150} step={1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateModulatorAmplitude(e)} />
       </div>
-      <div className='column'>
-        <Header>Carrier</Header>
-        <WaveformSelect value={state.carrier.type} update={updateCarrierWaveForm} />
-        <Header>{state.carrier.frequency}</Header>
-        <Header>{state.carrier.amplification.toFixed(2)}</Header>
-      </div>
-      <Slider defaultValue={state.carrier.frequency} min={0} max={1000} step={1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateCarrierFrequency(e)} />
-      <Slider defaultValue={state.carrier.amplification} min={0} max={1} step={0.01} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateCarrierAmplitude(e)} />
-      <div className='column'>
-        <Header>Modulator</Header>
-        <WaveformSelect value={state.modulator.type} update={updateModulatorWaveForm} />
-        <Header>{state.modulator.frequency}</Header>
-        <Header>{state.modulator.amplification.toFixed(2)}</Header>
-      </div>
-      <Slider defaultValue={state.modulator.frequency} min={0} max={150} step={1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateModulatorFrequency(e)} />
-      <Slider defaultValue={state.modulator.amplification} min={-150} max={150} step={1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateModulatorAmplitude(e)} />
     </div>
   )
 }
